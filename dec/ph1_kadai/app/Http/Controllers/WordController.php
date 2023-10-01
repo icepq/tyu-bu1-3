@@ -61,6 +61,8 @@ class WordController extends Controller
     public function edit(string $id)
     {
         //
+        $word = word::find($id);
+        return response()->view('word.edit', compact('word'));
     }
 
     /**
@@ -68,7 +70,21 @@ class WordController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //バリデーション
+        $validator = Validator::make($request->all(), [
+            'word' => 'required | max:64 | regex:/^[a-zA-Z]+$/',
+            'meaning' => 'required',
+        ]);
+        //バリデーション:エラー
+        if ($validator->fails()) {
+            return redirect()
+                ->route('word.edit', $id)
+                ->withInput()
+                ->withErrors($validator);
+            }
+        //データ更新処理
+        $result = Word::find($id)->update($request->all());
+        return redirect()->route('word.index');
     }
 
     /**
