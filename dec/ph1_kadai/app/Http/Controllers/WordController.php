@@ -5,13 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use App\Models\Word;
+use Auth;
+use App\Models\User;
+use App\Http\Controllers\SearchController;
 
 class WordController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {   
         $words = Word::getAllOrderBy();
         return response()->view('word.index',compact('words'));
@@ -42,10 +45,11 @@ class WordController extends Controller
             ->withInput()
             ->withErrors($validator);
         }
-        
+    
+        $data = $request->merge(['user_id' => Auth::user()->id])->all();
         $result = Word::create($request->all());
-        return redirect()->route('word.index');
-}
+        return redirect()->route('word.mypage');
+    }
 
     /**
      * Display the specified resource.
@@ -84,7 +88,7 @@ class WordController extends Controller
             }
         //データ更新処理
         $result = Word::find($id)->update($request->all());
-        return redirect()->route('word.index');
+        return redirect()->route('word.mypage');
     }
 
     /**
@@ -94,6 +98,41 @@ class WordController extends Controller
     {
         //
         $result = Word::find($id)->delete();
-        return redirect()->route('word.index');
+        return redirect()->route('word.mypage');
+    }
+
+    public function mydata(Request $request)
+    {
+        $sort=$request->get('sort');
+        // Userモデルに定義したリレーションを使用してデータを取得する．
+        if($sort=="char_asc"){
+            $words = User::query()
+            ->find(Auth::user()->id)
+            ->userWords()
+            ->orderBy('word','asc')
+            ->get();
+            return response()->view('word.index', compact('words'));
+        }elseif($sort=="date_asc"){
+            $words = User::query()
+            ->find(Auth::user()->id)
+            ->userWords()
+            ->orderBy('updated_at','asc')
+            ->get();
+            return response()->view('word.index', compact('words'));
+        }elseif($sort=="date_desc"){
+            $words = User::query()
+            ->find(Auth::user()->id)
+            ->userWords()
+            ->orderBy('updated_at','desc')
+            ->get();
+            return response()->view('word.index', compact('words'));
+        }else{
+            $words = User::query()
+            ->find(Auth::user()->id)
+            ->userWords()
+            ->orderBy('word','asc')
+            ->get();
+            return response()->view('word.index', compact('words'));
+        }
     }
 }

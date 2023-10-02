@@ -18,7 +18,7 @@
                 </div>
                 <!-- 🔽 一覧ページへのリンクを追加 -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('word.index')" :active="request()->routeIs('word.index')">
+                    <x-nav-link :href="route('word.mypage')" :active="request()->routeIs('word.maypage')">
                         {{ __('単語の閲覧') }}
                     </x-nav-link>
                 </div>
@@ -28,7 +28,13 @@
                         {{ __('単語の登録') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('search.input')" :active="request()->routeIs('search.input')">
+                        {{ __('単語の検索') }}
+                    </x-nav-link>
+                </div>
             </div>
+
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -84,7 +90,7 @@
             </x-responsive-nav-link>
         </div>
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('word.index')" :active="request()->routeIs('word.index')">
+            <x-responsive-nav-link :href="route('word.mypage')" :active="request()->routeIs('word.mypage')">
                 {{ __('単語の閲覧') }}
             </x-responsive-nav-link>
         </div>
@@ -94,6 +100,14 @@
                 {{ __('単語の登録') }}
             </x-responsive-nav-link>
         </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('search.input')" :active="request()->routeIs('search.input')">
+                {{ __('単語の検索') }}
+            </x-responsive-nav-link>
+        </div>
+
+        
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

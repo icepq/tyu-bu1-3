@@ -7,6 +7,7 @@
     </h2>
   </x-slot>
 
+  
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:w-10/12 md:w-8/10 lg:w-8/12">
       <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -16,6 +17,17 @@
               <tr>
                 <th class="py-4 px-6 bg-gray-lightest dark:bg-gray-darkest font-bold uppercase text-lg text-gray-dark dark:text-gray-200 border-b border-grey-light dark:border-grey-dark">マイ英単</th>
               </tr>
+              <form action="{{ route('word.mypage') }}" method="GET">
+                <div>
+                  <button type="submit" name="sort" value="char_desc">辞書順</button>
+                </div>
+                <div>                  
+                  <button type="submit" name="sort" value="date_asc">古い順</button>
+                </div>
+                <div>
+                  <button type="submit" name="sort" value="date_desc">新しい順</button>
+                </div>
+              </form>
             </thead>
             <tbody>
               @foreach ($words as $word)

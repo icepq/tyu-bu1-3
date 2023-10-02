@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WordController;
-
+use App\Http\Controllers\SearchController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +15,14 @@ use App\Http\Controllers\WordController;
 |
 */
 
-Route::resource('word', WordController::class);
+Route::middleware('auth')->group(function () {
+    Route::get('/word/search/input', [SearchController::class, 'create'])->name('search.input');
+    Route::get('/word/search/result_1', [SearchController::class, 'index1'])->name('search.result_1');
+    Route::get('/word/search/result_2', [SearchController::class, 'index2'])->name('search.result_2');
+    Route::get('/word/search/result_3', [SearchController::class, 'index3'])->name('search.result_3');
+    Route::get('/word/mypage', [WordController::class, 'mydata'])->name('word.mypage');
+    Route::resource('word', WordController::class);
+});
 
 Route::get('/', function () {
     return view('welcome');
