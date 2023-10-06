@@ -130,7 +130,7 @@ class WordController extends Controller
             $words = User::query()
             ->find(Auth::user()->id)
             ->userWords()
-            ->orderBy('word','asc')
+            ->orderBy('updated_at','desc')
             ->get();
             return response()->view('word.index', compact('words'));
         }
