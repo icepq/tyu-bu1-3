@@ -47,7 +47,9 @@ class CalendarView {
 			$days = $week->getDays($setting);
 			foreach($days as $day){
 				$html[] = '<td class="'.$day->getClassName().'">';
+				$html[] = '<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">';
 				$html[] = $day->render();
+				$html[] = '</button>';
 				$html[] = '</td>';
 			}
 			$html[] = '</tr>';
@@ -90,4 +92,7 @@ class CalendarView {
 	}
 	
 }
+
+
+
 
