@@ -81,6 +81,7 @@ class HolidaySetting extends Model
 
 	function isHoliday($date){
 		if(!$this->holidays)return false;
-		return $this->holidays->isHoliday($date);
+		ddd($this->holidays->isHoliday($date));
+		// return $this->holidays->isHoliday($date);
 	}
 }

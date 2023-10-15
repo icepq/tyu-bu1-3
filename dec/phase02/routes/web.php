@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalendarController;
-
+use App\Http\Controllers\Calendar;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,9 +32,10 @@ Route::middleware('auth')->group(function () {
 });
 
 //祝日設定
-Route::get('/holiday_setting', 'Calendar\HolidaySettingController@form')
+Route::get('/holiday_setting', [Calendar\HolidaySettingController::class,'form'])
     ->name("holiday_setting");
-Route::post('/holiday_setting', 'Calendar\HolidaySettingController@update')
+Route::post('/holiday_setting', [Calendar\HolidaySettingController::class,'update'])
     ->name("update_holiday_setting");
 
 require __DIR__.'/auth.php';
+
