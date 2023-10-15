@@ -5,7 +5,7 @@ use Yasumi\Yasumi;
 
 class HolidaySetting extends Model
 {
-    （略）
+    
 	private $holidays = null;
 
 	function loadHoliday($year){
