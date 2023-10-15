@@ -20,7 +20,7 @@ class CalendarWeek {
 	/**
 	 * @return CalendarWeekDay[]
 	 */
-	function getDays(){
+	function getDays(HolidaySetting $setting){
 
 		$days = [];
 
@@ -43,6 +43,7 @@ class CalendarWeek {
 				
 			//今月
 			$day = new CalendarWeekDay($tmpDay->copy());	
+			$day->checkHoliday($setting);
 			$days[] = $day;
 			//翌日に移動
 			$tmpDay->addDay(1);

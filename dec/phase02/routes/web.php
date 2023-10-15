@@ -31,4 +31,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+//祝日設定
+Route::get('/holiday_setting', 'Calendar\HolidaySettingController@form')
+    ->name("holiday_setting");
+Route::post('/holiday_setting', 'Calendar\HolidaySettingController@update')
+    ->name("update_holiday_setting");
+
 require __DIR__.'/auth.php';
