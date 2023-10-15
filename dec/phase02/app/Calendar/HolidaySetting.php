@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Calendar;
+namespace App\Calendar;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
