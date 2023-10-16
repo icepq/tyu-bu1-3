@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\Calendar;
+use App\Http\Controllers\ScheduleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,6 +15,8 @@ use App\Http\Controllers\Calendar;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::resource('schedule', ScheduleController::class);
+Route::get('/create', [ScheduleController::class,'create'])->name('schedule.create');
 
 Route::get('/calendar', [CalendarController::class,'show'])->name('calendar.show');
 
