@@ -46,9 +46,34 @@ class CalendarView {
 			$html[] = '<tr class="'.$week->getClassName().'">';
 			$days = $week->getDays($setting);
 			foreach($days as $day){
+				$html[] = '<!-- Bootstrap CSS -->';
+        		$html[] = '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">';
 				$html[] = '<td class="'.$day->getClassName().'">';
+				$html[] = '<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">';
 				$html[] = $day->render();
+				$html[] = '</button>';
 				$html[] = '</td>';
+				$html[] = '<!-- Modal -->';
+                $html[] = '<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+                    $html[] = '<div class="modal-dialog">';
+                        $html[] = '<div class="modal-content">';
+                        $html[] = '<div class="modal-header">';
+                            $html[] = '<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>';
+                            $html[] = '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
+                        $html[] = '</div>';
+                        $html[] = '<div class="modal-body">';
+                            $html[] = 'Welcome, Websolutionstuff...!!';
+                        $html[] = '</div>';
+                        $html[] = '<div class="modal-footer">';
+                            $html[] = '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';
+                            $html[] = '<button type="button" class="btn btn-outline-primary">Save changes</button>';
+                        $html[] = '</div>';
+                        $html[] = '</div>';
+                    $html[] = '</div>';
+                $html[] = '</div>';
+
+                $html[] = '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>';
+					
 			}
 			$html[] = '</tr>';
 		}
