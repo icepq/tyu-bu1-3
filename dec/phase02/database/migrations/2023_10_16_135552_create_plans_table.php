@@ -17,6 +17,8 @@ return new class extends Migration
             $table->timestamps();
         });
     }
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+okl,
 
     /**
      * Reverse the migrations.
