@@ -23,6 +23,14 @@
                         {{ __('Calendar') }}
                     </x-nav-link>
                 </div>
+
+                <!--Create links-->
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('schedule.create')" :active="request()->routeIs('schedule.create')">
+                        {{ __('Create') }}
+                    </x-nav-link>
+                </div>
+
             </div>
 
             <!-- Settings Dropdown -->

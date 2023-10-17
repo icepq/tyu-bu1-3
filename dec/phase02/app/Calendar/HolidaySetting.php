@@ -10,6 +10,7 @@ class HolidaySetting extends Model
 {
     const OPEN = 1;
 	const CLOSE = 2;
+
 	
 	protected $table = "holiday_setting";
 	
@@ -81,6 +82,7 @@ class HolidaySetting extends Model
 
 	function isHoliday($date){
 		if(!$this->holidays)return false;
-		return $this->holidays->isHoliday($date);
+		ddd($this->holidays->isHoliday($date));
+		// return $this->holidays->isHoliday($date);
 	}
 }

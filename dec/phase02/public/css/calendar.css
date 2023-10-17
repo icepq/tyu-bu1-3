@@ -18,7 +18,7 @@
 .calendar table td:before {
 	display: block;
 	float: left;
-	height: 50px;
+	height: 70px;
 	content: "";
 }
 
@@ -32,5 +32,5 @@
 }
 
 .day-close {
-	background-color: #FF7F50;
+	color: green;
 }

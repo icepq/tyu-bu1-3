@@ -3,7 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalendarController;
-
+use App\Http\Controllers\Calendar;
+use App\Http\Controllers\ScheduleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,6 +15,8 @@ use App\Http\Controllers\CalendarController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::resource('schedule', ScheduleController::class);
+Route::get('/create', [ScheduleController::class,'create'])->name('schedule.create');
 
 Route::get('/calendar', [CalendarController::class,'show'])->name('calendar.show');
 
@@ -32,9 +35,10 @@ Route::middleware('auth')->group(function () {
 });
 
 //祝日設定
-Route::get('/holiday_setting', 'Calendar\HolidaySettingController@form')
+Route::get('/holiday_setting', [Calendar\HolidaySettingController::class,'form'])
     ->name("holiday_setting");
-Route::post('/holiday_setting', 'Calendar\HolidaySettingController@update')
+Route::post('/holiday_setting', [Calendar\HolidaySettingController::class,'update'])
     ->name("update_holiday_setting");
 
 require __DIR__.'/auth.php';
+
