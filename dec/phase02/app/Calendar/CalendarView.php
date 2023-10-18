@@ -65,16 +65,16 @@ class CalendarView {
                             $html[] = '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
                         $html[] = '</div>';
                         $html[] = '<div class="modal-body">';
-                            $html[] = '@foreach ($schedules as $schedule)';
-							$html[] = 'if ($schedule->date == $dayDate) { ';
-								// スケジュールの詳細を表示するコードを追加します
-								$html[] = '<tr class="hover:bg-gray-lighter">';
-									$html[] = '<td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">';
-									$html[] = '<h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200">{{$schedule->schedule}}</h3>';
-									$html[] = '</td>';
-								$html[] = '</tr>';
-							$html[] = '}';
-							$html[] = '@endforeach';
+                            foreach ($schedules as $schedule){
+								if ($schedule->date == $dayDate) { 
+									// スケジュールの詳細を表示するコードを追加します
+									$html[] = '<tr class="hover:bg-gray-lighter">';
+										$html[] = '<td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">';
+										$html[] = '<h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200">{{$schedule->schedule}}</h3>';
+										$html[] = '</td>';
+									$html[] = '</tr>';
+								}
+							}
                         $html[] = '</div>';
                         $html[] = '<div class="modal-footer">';
                             $html[] = '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';
