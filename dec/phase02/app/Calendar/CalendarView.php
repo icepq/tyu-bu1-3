@@ -35,7 +35,7 @@ class CalendarView {
 	/**
 	 * カレンダーを出力する
 	 */
-	function render(){
+	function render($schedules=[]){
 		//HolidaySetting
 		$setting = HolidaySetting::firstOrNew();
 		$setting->loadHoliday($this->carbon->format("Y"));
