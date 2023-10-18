@@ -9,6 +9,7 @@ class Schedule extends Model
 {
     use HasFactory;
 
+    // アプリケーション側でcreateなどできない値を記述する
     protected $guarded = [
         'id',
         'created_at',

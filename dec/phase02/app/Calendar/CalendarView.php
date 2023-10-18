@@ -58,11 +58,11 @@ class CalendarView {
                     $html[] = '<div class="modal-dialog">';
                         $html[] = '<div class="modal-content">';
                         $html[] = '<div class="modal-header">';
-                            $html[] = '<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>';
+                            $html[] = '<h5 class="modal-title" id="exampleModalLabel">Schedule title</h5>';
                             $html[] = '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
                         $html[] = '</div>';
                         $html[] = '<div class="modal-body">';
-                            $html[] = 'Welcome, Websolutionstuff...!!';
+                            $html[] = '予定です!!';
                         $html[] = '</div>';
                         $html[] = '<div class="modal-footer">';
                             $html[] = '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';

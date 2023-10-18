@@ -13,8 +13,8 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $calendars = Calendar::getAllOrderByUpdated_at();
-        return response()->view('calendar.calendar',compact('calendar'));
+        $calendars = Schdule::all();
+        return response()->view('schdule.calendar',compact('schdule'));
     }
 
     /**
