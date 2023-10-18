@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;
+use App\Calendar\CalendarView;
 use App\Models\Schedule;
 
 class ScheduleController extends Controller
@@ -13,7 +14,22 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        //
+         // 全てのスケジュールを取得します。
+        $schedules = Schedule::all();
+
+        // 現在の日付または特定の日付を指定します。
+        // ここでは現在の日付を使用していますが、必要に応じて変更できます。
+        $date = now();
+
+        // CalendarView インスタンスを作成します。
+        $calendar = new CalendarView($date);
+
+        // カレンダーをレンダリングし、そのHTMLを取得します。
+        // ここでスケジュールデータも CalendarView に渡しています。
+        $calendarHtml = $calendar->render($schedules);
+
+        // HTMLをレスポンスとして返します。
+        return response()->make($calendarHtml);
     }
 
     /**

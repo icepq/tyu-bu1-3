@@ -10,6 +10,8 @@ class CalendarWeekDay {
 		$this->carbon = new Carbon($date);
 	}
 
+
+
 	function getClassName(){
 		$classNames = [ "day-" . strtolower($this->carbon->format("D")) ];
 
@@ -61,5 +63,9 @@ class CalendarWeekDay {
 			$this->isHoliday = true;
 		}
 		
+	}
+
+	public function getDate() {
+		return $this->carbon->toDateString();  // "Y-m-d" 形式で日付を返します。
 	}
 }
