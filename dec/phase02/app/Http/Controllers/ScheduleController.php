@@ -60,7 +60,7 @@ class ScheduleController extends Controller
         // create()は最初から用意されている関数
         // 戻り値は挿入されたレコードの情報
         $result = Schedule::create($request->all());
-        return redirect()->route('calendar.show');
+        return redirect()->route('calendar.index');
     }
 
     /**

@@ -10,11 +10,26 @@ class CalendarView {
 	function __construct($date){
 		$this->carbon = new Carbon($date);
 	}
+
 	/**
 	 * タイトル
 	 */
 	public function getTitle(){
 		return $this->carbon->format('Y年n月');
+	}
+
+	public function renderSchedules($schedules, $dayDate){
+		$html = [];
+		foreach ($schedules as $schedule){
+			if ($schedule->date == $dayDate) { 
+				$html[] = '<tr class="hover:bg-gray-lighter">';
+				$html[] = '<td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">';
+				$html[] = '<h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200">{{$schedule->schedule}}</h3>';
+				$html[] = '</td>';
+				$html[] = '</tr>';
+			}
+		}
+		return implode("", $html);
 	}
 
 	/**
@@ -24,6 +39,7 @@ class CalendarView {
 		//HolidaySetting
 		$setting = HolidaySetting::firstOrNew();
 		$setting->loadHoliday($this->carbon->format("Y"));
+
 		$html = [];
 		$html[] = '<div class="calendar">';
 		$html[] = '<table class="table">';
@@ -46,9 +62,8 @@ class CalendarView {
 			$html[] = '<tr class="'.$week->getClassName().'">';
 			$days = $week->getDays($setting);
 			foreach($days as $day){
-				$html[] = $dayDate = $day->getDate(); // 日付を取得します (例: "2023-10-18")
-				// 一意のモーダルIDを作成します
-    			$html[] = $modalId = 'modal-' . $dayDate;
+				$dayDate = $day->getDate(); 
+				$modalId = 'modal-' . $dayDate;
 				$html[] = '<!-- Bootstrap CSS -->';
         		$html[] = '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">';
 				$html[] = '<td class="'.$day->getClassName().'">';
@@ -58,40 +73,29 @@ class CalendarView {
 				$html[] = '</td>';
 				$html[] = '<!-- Modal -->';
                 $html[] = '<div class="modal fade" id="'.$modalId.'" tabindex="-1" aria-labelledby="'.$modalId.'Label" aria-hidden="true">';
-                    $html[] = '<div class="modal-dialog">';
-                        $html[] = '<div class="modal-content">';
-                        $html[] = '<div class="modal-header">';
-                            $html[] = '<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>';
-                            $html[] = '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
-                        $html[] = '</div>';
-                        $html[] = '<div class="modal-body">';
-                            foreach ($schedules as $schedule){
-								if ($schedule->date == $dayDate) { 
-									// スケジュールの詳細を表示するコードを追加します
-									$html[] = '<tr class="hover:bg-gray-lighter">';
-										$html[] = '<td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">';
-										$html[] = '<h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200">{{$schedule->schedule}}</h3>';
-										$html[] = '</td>';
-									$html[] = '</tr>';
-								}
-							}
-                        $html[] = '</div>';
-                        $html[] = '<div class="modal-footer">';
-                            $html[] = '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';
-                            $html[] = '<button type="button" class="btn btn-outline-primary">Save changes</button>';
-                        $html[] = '</div>';
-                        $html[] = '</div>';
-                    $html[] = '</div>';
+                $html[] = '<div class="modal-dialog">';
+                $html[] = '<div class="modal-content">';
+                $html[] = '<div class="modal-header">';
+                $html[] = '<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>';
+                $html[] = '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
+                $html[] = '</div>';
+                $html[] = '<div class="modal-body">';
+				$html[] = $this->renderSchedules($schedules, $dayDate);
+                $html[] = '</div>';
+                $html[] = '<div class="modal-footer">';
+                $html[] = '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';
+                $html[] = '<button type="button" class="btn btn-outline-primary">Save changes</button>';
+                $html[] = '</div>';
+                $html[] = '</div>';
+                $html[] = '</div>';
                 $html[] = '</div>';
 
                 $html[] = '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>';
-					
 			}
 			$html[] = '</tr>';
 		}
 		
 		$html[] = '</tbody>';
-
 		$html[] = '</table>';
 		$html[] = '</div>';
 		return implode("", $html);
@@ -99,14 +103,13 @@ class CalendarView {
 	
 	protected function getWeeks(){
 		$weeks = [];
-
 		//初日
 		$firstDay = $this->carbon->copy()->firstOfMonth();
 
 		//月末まで
 		$lastDay = $this->carbon->copy()->lastOfMonth();
 
-		//1週目
+		//一週目
 		$week = new CalendarWeek($firstDay->copy());
 		$weeks[] = $week;
 
@@ -115,18 +118,17 @@ class CalendarView {
 
 		//月末までループさせる
 		while($tmpDay->lte($lastDay)){
-			//週カレンダーViewを作成する
 			$week = new CalendarWeek($tmpDay, count($weeks));
 			$weeks[] = $week;
 			
-            //次の週=+7日する
-			$tmpDay->addDay(7);
+			//次の週=＋7日する
+            $tmpDay->addDay(7);
 		}
 
 		return $weeks;
 	}
-	
 }
+
 
 
 
