@@ -17,16 +17,26 @@ use App\Http\Controllers\ScheduleController;
 */
 Route::resource('schedule', ScheduleController::class);
 Route::get('/create', [ScheduleController::class,'create'])->name('schedule.create');
-
 Route::get('/calendar', [CalendarController::class,'show'])->name('calendar.show');
 
 Route::get('/', function () {
-     return view('welcome');
+    return view('calendar.welcome');
 });
 
+//dashboard
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('calendar.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+//calendar(main page)
+Route::get('/calendar', function () {
+    return view('calendar.calendar');
+})->middleware(['auth', 'verified'])->name('calendar');
+
+//create
+Route::get('/create', function () {
+    return view('calendar.dashboard');
+})->middleware(['auth', 'verified'])->name('create');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

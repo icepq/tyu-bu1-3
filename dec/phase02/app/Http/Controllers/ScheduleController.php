@@ -8,13 +8,15 @@ use App\Models\Schedule;
 
 class ScheduleController extends Controller
 {
+/////////////////////////////////////
+////多分違う
+/////////////////////////////////////
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $calendars = Schdule::all();
-        return response()->view('schdule.calendar',compact('schdule'));
+        //
     }
 
     /**
@@ -53,7 +55,8 @@ class ScheduleController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $calendars = Schdule::all();
+        return response()->view('calendar.calendar',compact('schdules'));
     }
 
     /**

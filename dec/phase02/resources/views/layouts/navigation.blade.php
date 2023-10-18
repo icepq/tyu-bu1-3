@@ -30,6 +30,8 @@
                         {{ __('Create') }}
                     </x-nav-link>
                 </div>
+<!---------------- 後で消す！！  scheduleの一覧画面 -->
+
 
             </div>
 
@@ -86,6 +88,14 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
+<!---------------- 必要か不明　　作成画面のリンク追加 -->
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('schedule.create')" :active="request()->routeIs('schdule.create')">
+                {{ __('Create') }}
+            </x-responsive-nav-link>
+        </div>
+<!---------------- 後で消す！！  scheduleの一覧画面 -->
+
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

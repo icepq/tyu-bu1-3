@@ -53,6 +53,7 @@ class CalendarView {
 				$html[] = $day->render();
 				$html[] = '</button>';
 				$html[] = '</td>';
+//////////////////modal
 				$html[] = '<!-- Modal -->';
                 $html[] = '<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
                     $html[] = '<div class="modal-dialog">';
