@@ -3,6 +3,10 @@ namespace App\Calendar;
 
 use Carbon\Carbon;
 
+$html[] = '<!-- Bootstrap CSS -->';
+$html[] = '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">';
+$html[] = '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>';
+
 class CalendarView {
 
 	private $carbon;
@@ -24,7 +28,7 @@ class CalendarView {
 			if ($schedule->date == $dayDate) { 
 				$html[] = '<tr class="hover:bg-gray-lighter">';
 				$html[] = '<td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">';
-				$html[] = '<h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200">{{$schedule->schedule}}</h3>';
+				$html[] = '<h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200">' . htmlspecialchars($schedule->schedule, ENT_QUOTES, 'UTF-8') . '</h3>';
 				$html[] = '</td>';
 				$html[] = '</tr>';
 			}
@@ -64,8 +68,7 @@ class CalendarView {
 			foreach($days as $day){
 				$dayDate = $day->getDate(); 
 				$modalId = 'modal-' . $dayDate;
-				$html[] = '<!-- Bootstrap CSS -->';
-        		$html[] = '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">';
+				
 				$html[] = '<td class="'.$day->getClassName().'">';
 				$html[] = '<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#'.$modalId.'">';
 				$html[] = $day->render();
@@ -90,7 +93,7 @@ class CalendarView {
                 $html[] = '</div>';
                 $html[] = '</div>';
 
-                $html[] = '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>';
+                
 			}
 			$html[] = '</tr>';
 		}
