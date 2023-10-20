@@ -2,10 +2,9 @@
 namespace App\Calendar;
 
 use Carbon\Carbon;
+use App\Models\Schedule;
 
-$html[] = '<!-- Bootstrap CSS -->';
-$html[] = '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">';
-$html[] = '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>';
+
 
 class CalendarView {
 
@@ -25,15 +24,11 @@ class CalendarView {
 	public function renderSchedules($schedules, $dayDate){
 		$html = [];
 		foreach ($schedules as $schedule){
-
-			if ($schedule->date == $dayDate) { 
-				
-				$html[] = '<tr class="hover:bg-gray-lighter">';
-				$html[] = '<td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">';
-				$html[] = '<h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200">' . htmlspecialchars($schedule->schedule, ENT_QUOTES, 'UTF-8') . '</h3>';
-				$html[] = '</td>';
-				$html[] = '</tr>';
-			}
+			// $html[] = '<tr class="hover:bg-gray-lighter">';
+			// $html[] = '<td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">';
+			$html[] = '<h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200">' . htmlspecialchars($schedule->schedule, ENT_QUOTES, 'UTF-8') . '</h3>';
+			// $html[] = '</td>';
+			// $html[] = '</tr>';
 		}
 		return implode("", $html);
 	}
@@ -45,6 +40,9 @@ class CalendarView {
 		//HolidaySetting
 		$setting = HolidaySetting::firstOrNew();
 		$setting->loadHoliday($this->carbon->format("Y"));
+
+		$html[] = '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">';
+		$html[] = '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>';
 
 		$html = [];
 		$html[] = '<div class="calendar">';
@@ -68,20 +66,20 @@ class CalendarView {
 			$html[] = '<tr class="'.$week->getClassName().'">';
 			$days = $week->getDays($setting);
 			foreach($days as $day){
-				$dayDate = $day->getDate(); 
+				$dayDate = $day->getDate();
 				$modalId = 'modal-' . $dayDate;
+				$schedules = Schedule::getAllOrderByUpdated_at($dayDate);
 				
 				$html[] = '<td class="'.$day->getClassName().'">';
 				$html[] = '<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#'.$modalId.'">';
 				$html[] = $day->render();
 				$html[] = '</button>';
 				$html[] = '</td>';
-				$html[] = '<!-- Modal -->';
                 $html[] = '<div class="modal fade" id="'.$modalId.'" tabindex="-1" aria-labelledby="'.$modalId.'Label" aria-hidden="true">';
                 $html[] = '<div class="modal-dialog">';
                 $html[] = '<div class="modal-content">';
                 $html[] = '<div class="modal-header">';
-                $html[] = '<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>';
+                $html[] = '<h5 class="modal-title" id="exampleModalLabel">'.$dayDate.'</h5>';
                 $html[] = '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
                 $html[] = '</div>';
                 $html[] = '<div class="modal-body">';
