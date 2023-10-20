@@ -49,6 +49,7 @@ class CalendarView {
 				$html[] = '<td class="'.$day->getClassName().'">';
 				$html[] = '<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">';
 				$html[] = $day->render();
+				// ここに予定をとってくる関数を作る
 				$html[] = '</button>';
 				$html[] = '</td>';
 			}
