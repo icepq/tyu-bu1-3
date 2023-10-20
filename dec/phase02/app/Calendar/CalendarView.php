@@ -17,6 +17,19 @@ class CalendarView {
 		return $this->carbon->format('Y年n月');
 	}
 
+	public function renderSchedules($schedules, $dayDate){
+		$html = [];
+		foreach ($schedules as $schedule){
+			// $html[] = '<tr class="hover:bg-gray-lighter">';
+			// $html[] = '<td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">';
+			$html[] = '<h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200">' . htmlspecialchars($schedule->schedule, ENT_QUOTES, 'UTF-8') . '</h3>';
+			$html[] = '<h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200">' . htmlspecialchars($schedule->detail, ENT_QUOTES, 'UTF-8') . '</h3>';	
+			// $html[] = '</td>';
+			// $html[] = '</tr>';
+		}
+		return implode("", $html);
+	}
+
 	/**
 	 * カレンダーを出力する
 	 */
