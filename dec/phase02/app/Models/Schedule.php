@@ -14,4 +14,10 @@ class Schedule extends Model
         'created_at',
         'updated_at',
     ];
+
+    public static function getAllOrderByUpdated_at($dayDate)
+  {
+    return self::where('date', 'like', $dayDate . '%')->orderBy('updated_at', 'desc')->get();
+  }
+
 }

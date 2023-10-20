@@ -15,4 +15,8 @@ class CalendarWeekBlankDay extends CalendarWeekDay {
 		return '';
 	}
 
+	public function getDate() {
+        return null;  // または適切なデフォルト値を返します。
+    }
+
 }
