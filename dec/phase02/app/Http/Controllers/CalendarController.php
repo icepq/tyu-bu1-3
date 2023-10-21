@@ -32,11 +32,10 @@ class CalendarController extends Controller
 		return view('calendar', ["calendar" => $calendar]);
 	}
 
-	public function getNextMonth(){
-		return $this->carbon->copy()->addMonthsNoOverflow()->format('Y-m');
-	}
-
-	public function getPreviousMonth(){
-		return $this->carbon->copy()->subMonthsNoOverflow()->format('Y-m');
+	public function redirect(Request $request) {
+    	$year = $request->input('selected_year');
+    	$month = $request->input('selected_month');
+    	// リダイレクトを行う
+    	return redirect()->route('calendar.show', ['year' => $year, 'month' => $month]);
 	}
 }
