@@ -93,6 +93,7 @@ class ScheduleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $result = Schedule::find($id)->delete();
+        return redirect()->route('calendar.thismonth');
     }
 }
