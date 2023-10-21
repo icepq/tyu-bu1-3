@@ -19,6 +19,7 @@ use App\Http\Controllers\ScheduleController;
 
 Route::resource('schedule', ScheduleController::class);
 Route::get('/create', [ScheduleController::class,'create'])->name('schedule.create');
+Route::get('/destroy', [ScheduleController::class,'destroy'])->name('schedule.destroy');
 
 Route::get('/thismonth', [CalendarController::class,'thismonth'])->name('calendar.thismonth');
 
