@@ -39,8 +39,8 @@ class CalendarView {
 			$html[] = '<h3 class="text-left text-gray-dark dark:text-gray-200">' . htmlspecialchars($schedule->detail, ENT_QUOTES, 'UTF-8') . '</h3>';	
 			$html[] = '</div>'; // 追加	
 			$html[] = '<form action="{{ route(schedule.destroy,$schedule->id) }}" method="POST" class="text-left">';
-            $html[] = '<input type="hidden" name="_method" value="DELETE">';
-            $html[] = '<input type="hidden" name="_token" value="' . csrf_token() . '">';
+            $html[] = @method('delete');
+            $html[] = @csrf;
             $html[] = '<button class="ml-3">';
             $html[] = '<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="gray">';
             $html[] = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />';

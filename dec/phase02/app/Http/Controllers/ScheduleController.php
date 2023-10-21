@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;
+use Carbon\Carbon;
 use App\Calendar\CalendarView;
 use App\Models\Schedule;
 
@@ -60,8 +61,14 @@ class ScheduleController extends Controller
         }
         // create()は最初から用意されている関数
         // 戻り値は挿入されたレコードの情報
+
         $result = Schedule::create($request->all());
-        return redirect()->route('calendar.show');
+        
+        $datetime = Carbon::parse($request->input('date'));
+        $year = $datetime->year;
+        $month = $datetime->month;
+        
+        return redirect()->route('calendar.show', ['year' => $year, 'month' => $month]);
     }
 
     /**
@@ -93,7 +100,17 @@ class ScheduleController extends Controller
      */
     public function destroy(string $id)
     {
+
+        $result = Schedule::find($id)([
+            'date' => $datetime
+        ]);
+
+        $year = $datetime->year;
+        $month = $datetime->month;
+
         $result = Schedule::find($id)->delete();
-        return redirect()->route('calendar.thismonth');
+
+        return redirect()->route('calendar.show', ['year' => $year, 'month' => $month]);
+
     }
 }

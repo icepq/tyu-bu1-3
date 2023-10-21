@@ -24,7 +24,7 @@ Route::get('/destroy', [ScheduleController::class,'destroy'])->name('schedule.de
 Route::get('/thismonth', [CalendarController::class,'thismonth'])->name('calendar.thismonth');
 
 Route::get('/{year}/{month}', [CalendarController::class,'show'])
-	->where(['year' => '[0-9]+', 'month' => '[0-9]+']);
+	->where(['year' => '[0-9]+', 'month' => '[0-9]+'])->name('calendar.show');
 
 Route::get('/', function () {
      return view('welcome');
