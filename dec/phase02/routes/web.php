@@ -15,10 +15,15 @@ use App\Http\Controllers\ScheduleController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
 Route::resource('schedule', ScheduleController::class);
 Route::get('/create', [ScheduleController::class,'create'])->name('schedule.create');
 
-Route::get('/calendar', [CalendarController::class,'show'])->name('calendar.show');
+Route::get('/thismonth', [CalendarController::class,'thismonth'])->name('calendar.thismonth');
+
+Route::get('/{year}/{month}', [CalendarController::class,'show'])
+	->where(['year' => '[0-9]+', 'month' => '[0-9]+']);
 
 Route::get('/', function () {
      return view('welcome');

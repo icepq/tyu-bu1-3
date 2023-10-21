@@ -19,10 +19,11 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('calendar.show')" :active="request()->routeIs('calendar.show')">
+                    <x-nav-link :href="route('calendar.thismonth')" :active="request()->routeIs('calendar.thismonth')">
                         {{ __('Calendar') }}
                     </x-nav-link>
                 </div>
+                
 
                 <!--Create links-->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
