@@ -74,11 +74,12 @@ class CalendarView {
 				$html[] = '<td class="'.$day->getClassName().'">';
 				$html[] = '<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#'.$modalId.'">';
 				$html[] = $day->render();
+				
+				// ここに予定をとってくる関数を作る
+				$html[] = '</button>';
 				foreach ($schedules as $schedule){
 					$html[] = '<h3 class="text-left text-gray-dark dark:text-gray-200">' . htmlspecialchars($schedule->schedule, ENT_QUOTES, 'UTF-8') . '</h3>';
 				}
-				// ここに予定をとってくる関数を作る
-				$html[] = '</button>';
 				$html[] = '</td>';
                 $html[] = '<div class="modal fade" id="'.$modalId.'" tabindex="-1" aria-labelledby="'.$modalId.'Label" aria-hidden="true">';
                 $html[] = '<div class="modal-dialog">';
