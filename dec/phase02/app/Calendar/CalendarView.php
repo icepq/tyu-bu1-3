@@ -89,7 +89,7 @@ class CalendarView {
                 $html[] = '</div>';
                 $html[] = '<div class="modal-footer">';
                 $html[] = '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';
-                $html[] = '<a href="{{ route('schedule.create') }}">Create</a>';
+                $html[] = '<a href="' . route('schedule.create') . '">Create</a>';
                 $html[] = '</div>';
                 $html[] = '</div>';
                 $html[] = '</div>';
