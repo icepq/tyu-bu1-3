@@ -18,10 +18,12 @@ use App\Http\Controllers\ScheduleController;
 
 
 Route::resource('schedule', ScheduleController::class);
+
 Route::get('/create', [ScheduleController::class,'create'])->name('schedule.create');
 Route::get('/destroy', [ScheduleController::class,'destroy'])->name('schedule.destroy');
 
 Route::get('/thismonth', [CalendarController::class,'thismonth'])->name('calendar.thismonth');
+Route::post('calendar/redirect', [CalendarController::class,'redirect'])->name('calendar.redirect');
 
 Route::get('/{year}/{month}', [CalendarController::class,'show'])
 	->where(['year' => '[0-9]+', 'month' => '[0-9]+'])->name('calendar.show');
