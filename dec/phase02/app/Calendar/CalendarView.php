@@ -21,6 +21,14 @@ class CalendarView {
 		return $this->carbon->format('Y年n月');
 	}
 
+	public function returnYear(){
+		return $this->carbon->year;
+	}
+
+	public function returnMonth(){
+		return $this->carbon->month;
+	}
+
 	public function renderSchedules($schedules, $dayDate){
 		$html = [];
 		foreach ($schedules as $schedule){
