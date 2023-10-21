@@ -51,7 +51,7 @@ class CalendarView {
 	function render($schedules=[]){
 		//HolidaySetting
 		$setting = HolidaySetting::firstOrNew();
-		$setting->loadHoliday($this->carbon->format("Y"));
+        $setting->loadHoliday($this->carbon->format("Y"));
 
 		$html[] = '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">';
 		$html[] = '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>';
@@ -80,16 +80,17 @@ class CalendarView {
 			foreach($days as $day){
 				$dayDate = $day->getDate();
 				$modalId = 'modal-' . $dayDate;
-				$schedules = Schedule::getAllOrderByUpdated_at($dayDate);
-				
+				$schedules = Schedule::where('date', $dayDate)->orderBy('updated_at')->get();
 				$html[] = '<td class="'.$day->getClassName().'">';
 				$html[] = '<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#'.$modalId.'">';
 				$html[] = $day->render();
 				
 				// ここに予定をとってくる関数を作る
 				$html[] = '</button>';
-				foreach ($schedules as $schedule){
-					$html[] = '<h3 class="text-left text-gray-dark dark:text-gray-200">' . htmlspecialchars($schedule->schedule, ENT_QUOTES, 'UTF-8') . '</h3>';
+				if(count($schedules) > 0) {
+					foreach ($schedules as $schedule){
+						$html[] = '<h3 class="text-left text-gray-dark dark:text-gray-200">' . htmlspecialchars($schedule->schedule, ENT_QUOTES, 'UTF-8') . '</h3>';
+					}
 				}
 				$html[] = '</td>';
                 $html[] = '<div class="modal fade" id="'.$modalId.'" tabindex="-1" aria-labelledby="'.$modalId.'Label" aria-hidden="true">';

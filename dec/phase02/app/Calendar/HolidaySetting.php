@@ -74,15 +74,19 @@ class HolidaySetting extends Model
 		return $this->flag_holiday == HolidaySetting::CLOSE;
 	}
 
-    private $holidays = null;
+    protected $holidays = null;
 
-	function loadHoliday($year){
-		$this->holidays = Yasumi::create("Japan", $year,"ja_JP");		
-	}
+    public function loadHoliday(int $year): void
+    {
+        $this->holidays = Yasumi::create('Japan', $year, 'ja_JP');
+    }
 
-	function isHoliday($date){
-		if(!$this->holidays)return false;
-		ddd($this->holidays->isHoliday($date));
-		// return $this->holidays->isHoliday($date);
-	}
+    public function isHoliday($date): bool
+    {
+        if (!$this->holidays) {
+            return false;
+        }
+
+        return $this->holidays->isHoliday($date);
+    }
 }
