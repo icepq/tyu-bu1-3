@@ -34,10 +34,10 @@ class CalendarView {
 		foreach ($schedules as $schedule){
 			// $html[] = '<tr class="hover:bg-gray-lighter">';
 			// $html[] = '<td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">';
-			$html[] = '<div class="d-flex justify-content-between align-items-center mb-2">'; // 追加
+			$html[] = '<div class="d-flex justify-content-between align-items-center mb-2">'; 
 			$html[] = '<h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200">' . htmlspecialchars($schedule->schedule, ENT_QUOTES, 'UTF-8') . '</h3>';
 			$html[] = '<h3 class="text-left text-gray-dark dark:text-gray-200">' . htmlspecialchars($schedule->detail, ENT_QUOTES, 'UTF-8') . '</h3>';	
-			$html[] = '</div>'; // 追加	
+			$html[] = '</div>'; 
 			//$html[] = '<form action="{{ route(schedule.destroy,$schedule->id) }}" method="POST" class="text-left">';
             //$html[] = @method('delete');
             //$html[] = @csrf;
@@ -90,7 +90,7 @@ class CalendarView {
 				$modalId = 'modal-' . $dayDate;
 				$schedules = Schedule::where('date', $dayDate)->orderBy('updated_at')->get();
 				$html[] = '<td class="'.$day->getClassName().'">';
-				if ($day->render()) { // 日付が存在する場合のみボタンをレンダリング
+				if ($day->render()) {
 					$html[] = '<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#'.$modalId.'">';
 					$html[] = $day->render();
 					$html[] = '</button>';
