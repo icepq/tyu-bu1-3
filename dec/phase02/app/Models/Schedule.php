@@ -17,7 +17,7 @@ class Schedule extends Model
 
     public static function getAllOrderByUpdated_at($dayDate)
   {
-    return self::where('date', 'like', $dayDate . '%')->orderBy('updated_at', 'desc')->get();
+    return self::where('date', 'like', $dayDate . '%')->orderBy('date', 'desc')->get();
   }
 
 }

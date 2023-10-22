@@ -80,11 +80,11 @@ class CalendarView {
 			foreach($days as $day){
 				$dayDate = $day->getDate();
 				$modalId = 'modal-' . $dayDate;
-				$schedules = Schedule::where('date', $dayDate)->orderBy('updated_at')->get();
 				$html[] = '<td class="'.$day->getClassName().'">';
 				if ($day->render()) {
 					$html[] = '<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#'.$modalId.'">';
 					$html[] = $day->render();
+					$schedules = Schedule::getAllOrderByUpdated_at($dayDate);
 					$html[] = '</button>';
 				}
 				if(count($schedules) > 0) {
