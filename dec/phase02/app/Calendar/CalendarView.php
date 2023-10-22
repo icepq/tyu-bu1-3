@@ -34,10 +34,11 @@ class CalendarView {
 		foreach ($schedules as $schedule){
 			// $html[] = '<tr class="hover:bg-gray-lighter">';
 			// $html[] = '<td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">';
-			$html[] = '<div class="d-flex justify-content-between align-items-center mb-2">'; // 追加
+			$html[] = '<div class="d-flex justify-content-between align-items-center mb-2">'; 
 			$html[] = '<h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200">' . htmlspecialchars($schedule->schedule, ENT_QUOTES, 'UTF-8') . '</h3>';
 			$html[] = '<h3 class="text-left text-gray-dark dark:text-gray-200">' . htmlspecialchars($schedule->detail, ENT_QUOTES, 'UTF-8') . '</h3>';	
 			$html[] = '</div>'; // 追加	
+
 			// $html[] = '</td>';
 			// $html[] = '</tr>';
 		}
@@ -81,11 +82,11 @@ class CalendarView {
 				$modalId = 'modal-' . $dayDate;
 				$schedules = Schedule::where('date', $dayDate)->orderBy('updated_at')->get();
 				$html[] = '<td class="'.$day->getClassName().'">';
-				$html[] = '<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#'.$modalId.'">';
-				$html[] = $day->render();
-				
-				// ここに予定をとってくる関数を作る
-				$html[] = '</button>';
+				if ($day->render()) {
+					$html[] = '<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#'.$modalId.'">';
+					$html[] = $day->render();
+					$html[] = '</button>';
+				}
 				if(count($schedules) > 0) {
 					foreach ($schedules as $schedule){
 						$html[] = '<h3 class="text-left text-gray-dark dark:text-gray-200">' . htmlspecialchars($schedule->schedule, ENT_QUOTES, 'UTF-8') . '</h3>';
@@ -101,12 +102,10 @@ class CalendarView {
                 $html[] = '</div>';
                 $html[] = '<div class="modal-body">';
 				$html[] = $this->renderSchedules($schedules, $dayDate);
-				
                 $html[] = '</div>';
                 $html[] = '<div class="modal-footer">';
                 $html[] = '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>';
                 $html[] = '<a href="' . route('schedule.create', ['date' => $dayDate]) . '" class="btn btn-outline-primary">Create</a>';
-
                 $html[] = '</div>';
                 $html[] = '</div>';
                 $html[] = '</div>';

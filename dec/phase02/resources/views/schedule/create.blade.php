@@ -25,7 +25,7 @@
             
             <div class="flex flex-col mb-4">
               <x-input-label for="date" :value="__('日付')" />
-              <x-text-input id="date" class="block mt-1 w-full" type="datetime-local" name="date" :value="request('date') ?? old('date')" required autofocus />
+              <x-text-input id="date" class="block mt-1 w-full" type="datetime" name="date" :value="request('date') ?? old('date')" required autofocus />
               <x-input-error :messages="$errors->get('date')" class="mt-2" />
             </div>
 
